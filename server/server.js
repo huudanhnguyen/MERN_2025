@@ -4,8 +4,15 @@ const express = require('express');
 const connectDB = require('./config/dbconnect.js');
 const initRoutes = require('./routes/index.js'); // Import routes
 const cookieParser = require('cookie-parser'); // Middleware for parsing cookies
+const cors = require('cors'); // Middleware for enabling CORS
 
 const app = express();
+app.use(cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:3000', // Allow requests from the client URL
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
+})); // Enable CORS for all routes
 app.set('query parser', 'extended');
 app.use(express.json()); // Middleware to parse JSON data
 app.use(express.urlencoded({ extended: true })); // Middleware to parse JSON and URL-encoded data
