@@ -3,14 +3,11 @@ import {Sidebar, Banner } from "../../components";
 const Home = () => {
   return (
     <div className="w-main flex">
-      <div className='border w-main h-[11px] py-[50px] w-[25%] flex-auto'>
+      <div className=' w-main h-[11px] py-[5px] w-[30%] flex-auto'>
       <Sidebar />
-      <span>deal Daily</span>
       </div>
-      
-      <div className='border w-main h-[11px] py-[50px] pl-5 w-[75%] flex-auto'>
+      <div className=' w-main h-[11px] py-[5px] pl-5 w-[75%] flex-auto'>
       <Banner />
-      <span>Items</span>
       </div>
     </div>
 

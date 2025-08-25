@@ -1,22 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { getApiCategories } from '../apis/app'; // Đảm bảo đường dẫn này đúng
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+
+// 1. Import action `fetchCategories` từ file asyncActions của bạn
+import { fetchCategories } from '../store/asyncActions'; 
+// 2. Import hàm tiện ích createSlug
+import { createSlug } from '../utils/helpers'; // <-- Đảm bảo đường dẫn này đúng
 
 const Sidebar = () => {
-  useEffect(() => {
-    // Định nghĩa và gọi hàm ngay bên trong useEffect
-    const fetchCategories = async () => {
-      const response = await getApiCategories();
-      console.log(response);
-    };
+    const dispatch = useDispatch();
+    const { categories, loading } = useSelector(state => state.app);
+    
+    console.log('Loading state:', loading);
+    console.log('Categories from Redux:', categories);
+    // 5. Dùng useEffect để gọi action fetchCategories MỘT LẦN DUY NHẤT
+    useEffect(() => {
+        // Gửi action đi để Redux bắt đầu quá trình gọi API
+        dispatch(fetchCategories());
+    }, [dispatch]);
 
-    fetchCategories();
-  }, []); // Mảng phụ thuộc rỗng đảm bảo useEffect chỉ chạy một lần sau khi component được mount
-
-  return (
-    <div>
-      sidebar
-    </div>
-  );
+    return (
+        <div className='flex flex-col border'>
+            {loading && <div>Loading categories...</div>}
+            {!loading && categories?.map((el) => (
+                <NavLink
+                    key={el._id} 
+                    to={`/${createSlug(el.title)}`}
+                    className={({ isActive }) => 
+                        isActive 
+                        ? 'bg-main text-white px-5 pt-[15px] pb-[14px] text-sm' 
+                        : 'px-5 pt-[15px] pb-[14px] text-sm hover:text-main'
+                    }
+                >
+                    {el.title}
+                </NavLink>
+            ))}
+        </div>
+    );
 };
 
 export default Sidebar;
