@@ -52,6 +52,10 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
     },
+    thumb:{
+        type: String,
+        default: '',
+    },
     imageUrl: {
         type: String,
         default: '',

@@ -46,6 +46,8 @@ const fn = asyncHandler(async (item, categoryName) => {
         sold: Math.round(Math.random() * 40),
         images: item.images,
         color: colors[0], // Lấy màu đầu tiên làm màu chính, hoặc bạn có thể lưu cả mảng nếu schema cho phép
+        thumb: item.thumb || (item.images && item.images.length > 0 ? item.images[0] : ''),
+        totalRating: parseFloat((Math.random() * (5 - 3.5) + 3.5).toFixed(1))
     });
 });
 

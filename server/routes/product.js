@@ -5,7 +5,9 @@ const uploadCloud = require('../config/cloudinary.config');
 
 router.put('/uploadImage/:pid', [verifyToken, isAdmin], uploadCloud.array('images',10), ctrls.uploadImageProduct);
 router.post('/',[verifyToken, isAdmin], uploadCloud.array('images',10), ctrls.createProduct);
-router.get('/',[verifyToken, isAdmin], ctrls.getAllProducts);
+// router.get('/',[verifyToken, isAdmin], ctrls.getAllProducts);
+router.get('/', ctrls.getAllProducts);
+
 router.get('/:pid',[verifyToken, isAdmin], ctrls.getProduct);
 router.put('/:pid',[verifyToken, isAdmin], uploadCloud.array('images',10), ctrls.updateProduct);
 router.delete('/:id',[verifyToken, isAdmin], ctrls.deleteProduct);
