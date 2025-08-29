@@ -1,17 +1,19 @@
-import React from "react";
-import {Sidebar, Banner } from "../../components";
-const Home = () => {
-  return (
-    <div className="w-main flex">
-      <div className=' w-main h-[11px] py-[5px] w-[30%] flex-auto'>
-      <Sidebar />
-      </div>
-      <div className=' w-main h-[11px] py-[5px] pl-5 w-[75%] flex-auto'>
-      <Banner />
-      </div>
-    </div>
+import React, {useEffect, useState} from "react";
+import { Sidebar, Banner, BestSeller, NewProduct } from "../../components";
 
-  );
+const Home = () => {
+    return (
+        <div className='w-main flex gap-5'>
+            <div className='w-[20%] flex flex-col'>
+                <Sidebar />
+            </div>
+            <div className='w-[80%] flex flex-col gap-5'>
+                <Banner />
+                <BestSeller />
+            </div>
+
+        </div>
+    );
 };
 
 export default Home;

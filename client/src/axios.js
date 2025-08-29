@@ -1,25 +1,20 @@
 import axios from 'axios';
 
-// Tạo một instance của axios với cấu hình tùy chỉnh
 const instance = axios.create({
-    // SỬA DÒNG NÀY
-    baseURL: '/api' // <-- Đổi thành '/api'
+    baseURL: '/api'
 });
-
-// Thêm một interceptor cho request (áp dụng cho 'instance')
 instance.interceptors.request.use(
     (config) => {
-        // Làm gì đó trước khi request được gửi đi
-        // Ví dụ: có thể thêm token xác thực vào đây
+        const token = localStorage.getItem('access_token'); // <-- Thay 'access_token' bằng key bạn dùng để lưu token
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
         return config;
     },
     (error) => {
-        // Làm gì đó với lỗi của request
         return Promise.reject(error);
     }
 );
 
-// ... code interceptor cho response giữ nguyên ...
 
-// Export instance để sử dụng ở những nơi khác trong dự án
 export default instance;

@@ -10,10 +10,6 @@ import { createSlug } from '../utils/helpers'; // <-- Đảm bảo đường d�
 const Sidebar = () => {
     const dispatch = useDispatch();
     const { categories, loading } = useSelector(state => state.app);
-    
-    console.log('Loading state:', loading);
-    console.log('Categories from Redux:', categories);
-    // 5. Dùng useEffect để gọi action fetchCategories MỘT LẦN DUY NHẤT
     useEffect(() => {
         // Gửi action đi để Redux bắt đầu quá trình gọi API
         dispatch(fetchCategories());
