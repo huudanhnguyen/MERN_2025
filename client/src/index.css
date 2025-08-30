@@ -38,31 +38,54 @@
     color: black;
 }
 
-/* button.slick-next {
-  right: 60px;
+/* Banner Slick cụ thể */
+.custom-banner-slick .slick-prev,
+.custom-banner-slick .slick-next {
+    position: absolute; /* Định vị tuyệt đối */
+    top: 50%; /* Canh giữa theo chiều dọc */
+    transform: translateY(-50%);
+    z-index: 20; /* Đảm bảo nút nằm trên các phần tử khác */
+    width: 40px; /* Kích thước nút */
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.5); /* Nền trắng mờ */
+    border-radius: 50%; /* Bo tròn */
 }
-button.slick-next:before {
-  color: gray;
-  content: "\276F";
-  background-color: #d5bebecc;
-  width: 80px;
-  height: 80px;
-  font-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+/* Di chuyển nút Prev ra bên trái */
+.custom-banner-slick .slick-prev {
+    left: 20px; /* Cách mép trái 20px */
 }
-button.slick-prev {
-  left: -5px;
+
+/* Di chuyển nút Next ra bên phải */
+.custom-banner-slick .slick-next {
+    right: 20px; /* Cách mép phải 20px */
 }
-button.slick-prev:before {
-  color: gray;
-  content: "\276E";
-  background-color: #d5bebecc;
-  width: 80px;
-  height: 80px;
-  font-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
+
+/* Đảm bảo nút không bị ẩn đi */
+.custom-banner-slick .slick-prev,
+.custom-banner-slick .slick-next {
+    display: block !important;
+}
+
+/* Style cho icon mũi tên bên trong nút */
+.custom-banner-slick .slick-prev:before {
+    content: "\276E"; /* Mũi tên trái */
+    font-size: 40px;
+    color: black;
+}
+/* Style cho icon mũi tên bên trong nút */
+.custom-banner-slick .slick-next:before {
+    content: "\276F"; /* Mũi tên trái */
+    font-size: 40px;
+    color: black;
+}
+
+/* Hiệu ứng khi di chuột vào nút */
+.custom-banner-slick .slick-prev:hover,
+.custom-banner-slick .slick-next:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.custom-banner-slick .slick-prev:hover:before,
+.custom-banner-slick .slick-next:hover:before {
+    opacity: 1;
+}

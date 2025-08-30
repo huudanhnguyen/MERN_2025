@@ -1,5 +1,4 @@
 import React from "react";
-import { FaHeart, FaList, FaEye } from "react-icons/fa";
 import { formatPrice, renderRatingStars } from "../utils/helpers";
 import SelectOptions from "./SelectOptions";
 
