@@ -8,7 +8,7 @@ const cors = require('cors'); // Middleware for enabling CORS
 
 const app = express();
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000', // Allow requests from the client URL
+    origin: process.env.CLIENT_URL || 'http://localhost:5173', // Allow requests from the client URL
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers

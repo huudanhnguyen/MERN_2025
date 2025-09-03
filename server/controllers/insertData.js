@@ -74,8 +74,7 @@ const insertProductCategory = asyncHandler(async (req, res) => {
                 $set: {
                     title: cate.cate,
                     brand: cate.brand,
-                    // THÊM DÒNG NÀY ĐỂ SỬA LỖI
-                    // slug: slugify(cate.cate, { lower: true })
+                    img: cate.img,
                 }
             },
             { upsert: true }

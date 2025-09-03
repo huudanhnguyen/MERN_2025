@@ -10,6 +10,10 @@ const productCategorySchema = new moongose.Schema({
     type: [String],
     required: true,
   },
+  img: {
+    type: String,
+    default: '',
+  },
 }, {
   timestamps: true,
 });
