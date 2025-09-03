@@ -11,5 +11,8 @@ export {default as FeaturedProducts} from './FeaturedProducts';
 export {default as QuickViewModal} from './QuickViewModal';
 export {default as BigAdBanners} from './BigAdBanners';
 export {default as NewArrivals} from './NewArrivals';
+export {default as HotCollections} from './HotCollections';
+export {default as BlogPost} from './BlogPost';
+
 
 

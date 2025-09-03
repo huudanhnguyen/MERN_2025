@@ -10,6 +10,8 @@ const icons = {
     FaUser,
     FaBagShopping
 };
+export default icons;
+
 export const categoryIcons = {
     'smartphone': FaMobileAlt,
     'tablet': FaTabletAlt,
@@ -20,5 +22,5 @@ export const categoryIcons = {
     'speaker': FaSpeakerDeck,
     'television': FaTv,
 };
+export const DefaultCategoryIcon = FaTshirt;
 
-export default icons;

@@ -1,11 +1,12 @@
-// src/components/NewArrivals.jsx
-
 import React, { useState, useEffect,useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Slider from 'react-slick';
+import { useSelector } from 'react-redux'; // 1. Import useSelector
 import { getAllProducts } from '../apis/product';
 import Product from './Product';
 import QuickViewModal from './QuickViewModal';
+import { getApiCategories } from '../apis/categoryProduct'; // 1. Import thêm getApiCategories
+
 
 const NewArrivals = () => {
     // State chỉ để lưu sản phẩm mới
@@ -117,4 +118,3 @@ const NewArrivals = () => {
 };
 
 export default NewArrivals;
-

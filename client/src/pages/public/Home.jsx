@@ -8,6 +8,8 @@ import {
   FeaturedProducts,
   BigAdBanners,
   NewArrivals,
+  HotCollections,
+  BlogPost,
 } from "../../components";
 
 const Home = () => {
@@ -32,6 +34,12 @@ const Home = () => {
       </div>
       <div className="w-main mt-5">
         <NewArrivals />
+      </div>
+      <div className="w-main mt-5">
+        <HotCollections />
+      </div>
+      <div className="w-main mt-5">
+        <BlogPost />
       </div>
     </>
   );
