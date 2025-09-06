@@ -4,6 +4,7 @@ const { verifyToken,isAdmin } = require('../middlewares/verifyToken');
 
 // User registration route
 router.post('/register', ctrls.register);
+router.get('/finalRegister/:token', ctrls.finalRegister);
 // User login route
 router.post('/login', ctrls.login);
 router.get('/profile',verifyToken, ctrls.getUserProfile);
