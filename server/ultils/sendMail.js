@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 // Lấy thông tin cấu hình email từ file .env
 const { MAIL_NAME, EMAIL_APP_PASSWORD } = process.env;
-console.log('>>> Check process.env in sendMail.js:', MAIL_NAME);
+// console.log('>>> Check process.env in sendMail.js:', MAIL_NAME);
 // Cấu hình transporter của Nodemailer để sử dụng dịch vụ Gmail
 const transporter = nodemailer.createTransport({
     service: 'gmail',

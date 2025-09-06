@@ -5,8 +5,8 @@ const { generateToken, generateRefreshToken } = require('../middlewares/jwt');
 const crypto = require('crypto'); // For generating secure tokens
 const sendEmail = require('../ultils/sendMail'); // Import hàm gửi email
 const register = asyncHandler(async (req, res) => {
-    const {firstname, lastname, email, mobile, password} = req.body
-    if (!firstname || !lastname || !email || !mobile || !password) {
+    const {firstname, lastname, email, password} = req.body
+    if (!firstname || !lastname || !email || !password) {
         return res.status(400).json({ 
             success: false, 
             message: 'All fields are required'
