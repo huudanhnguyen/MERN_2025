@@ -5,6 +5,8 @@ import ReactDOM from "react-dom"; // 1. Import ReactDOM để dùng Portal
 import { formatPrice, renderRatingStars } from "../utils/helpers.jsx";
 import { FaEye, FaHeart, FaList } from "react-icons/fa";
 import QuickViewModal from "./QuickViewModal"; // 2. Import Modal
+import { Link } from "react-router-dom";
+import path from "../utils/path";
 
 const ProductCard = ({ productData }) => {
   // 3. Component tự quản lý state của modal
@@ -23,18 +25,19 @@ const ProductCard = ({ productData }) => {
   return (
     // Thẻ cha bây giờ có thể là div, không nhất thiết là <a>
     <div className="w-full flex items-center gap-4 p-2 border hover:shadow-lg rounded-md transition-shadow group relative">
-      {/* --- Hình ảnh --- */}
-      <div className="w-30 h-40 flex-shrink-0">
+      <Link className="w-30 h-40 flex-shrink-0"
+      to={`/${path.DETAIL_PRODUCT}/${productData._id}/${productData.slug}`}>
         <img
           src={imageUrl}
           alt={productName}
           className="w-full h-full object-cover rounded-md"
         />
-      </div>
+      </Link>
 
       {/* --- Thông tin sản phẩm --- */}
       <div className="flex flex-col flex-grow">
-        <p className="font-semibold truncate">{productName}</p>
+        <Link className="font-semibold truncate"
+        to={`/${path.DETAIL_PRODUCT}/${productData._id}/${productData.slug}`}>{productName}</Link>
         <p className="text-gray-500 mt-1">
           {formatPrice(productData.price)}
         </p>

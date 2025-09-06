@@ -1,6 +1,8 @@
 import React from "react";
 import { formatPrice, renderRatingStars } from "../utils/helpers";
 import SelectOptions from "./SelectOptions";
+import { Link } from "react-router-dom";
+import path from "../utils/path";
 
 const Product = ({ productData, label, onQuickView }) => {
   if (!productData) return null;
@@ -17,13 +19,16 @@ const Product = ({ productData, label, onQuickView }) => {
   return (
     <div className="w-full border rounded-md overflow-hidden relative group text-center">
       {/* --- Phần hình ảnh --- */}
-      <div className="w-full h-[250px] overflow-hidden">
+      <Link
+        className="w-full h-[250px] overflow-hidden"
+        to={`/${path.DETAIL_PRODUCT}/${productData._id}/${productData.slug}`}
+      >
         <img
           src={imageUrl}
           alt={productName}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" // Thêm hiệu ứng zoom
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-      </div>
+      </Link>
 
       {/* --- Phần nhãn (NEW/TRENDING) --- */}
       {label && (
@@ -39,7 +44,12 @@ const Product = ({ productData, label, onQuickView }) => {
 
       {/* --- Phần thông tin sản phẩm --- */}
       <div className="p-4">
-        <div className="text-lg font-semibold truncate">{productName}</div>
+        <Link
+          className="text-lg font-semibold truncate"
+          to={`/${path.DETAIL_PRODUCT}/${productData._id}/${productData.slug}`}
+        >
+          {productName}
+        </Link>
 
         <div className="mt-1 text-lg font-semibold text-main">
           {formatPrice(productData?.price)}

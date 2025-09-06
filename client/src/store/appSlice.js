@@ -38,4 +38,5 @@ export const appSlice = createSlice({
                 state.error = action.payload;
             });
     },
+    
 });

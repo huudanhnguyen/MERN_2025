@@ -42,12 +42,6 @@ const header = () => {
             </div>
           </div>
 
-          <div>
-            <div className="flex gap-2 items-center px-6">
-              <FaUser color="red"/>
-              <span className="font-semibold">Login</span>
-            </div>
-          </div>
         </div>
     </div>
   )
