@@ -10,6 +10,7 @@ const path = {
   OUR_SERVICES: "our-services",
   FAQs: "faqs",
   REGISTER: "register",
+  FINAL_REGISTER: "finalRegister/:status",
   FORGOT_PASSWORD:"forgot-password",
   CART: "cart",
   CHECKOUT: "checkout",

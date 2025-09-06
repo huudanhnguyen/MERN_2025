@@ -10,6 +10,9 @@ export {default as DetailProduct} from './DetailProduct';
 export {default as Blogs} from './Blogs';
 export {default as FAQs} from './FAQs';
 export {default as OurServices} from './OurServices';
+export {default as FinalRegister} from './FinalRegister';
+
+
 
 
 

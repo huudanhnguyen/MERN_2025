@@ -1,7 +1,7 @@
 // src/pages/public/Login.jsx
 
 import React, { useState,useEffect  } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/userSlice'
 
@@ -10,6 +10,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const location = useLocation();
+    console.log(location);
 
     // Lấy trạng thái từ Redux store để xử lý sau khi đăng nhập
     const { isLoggedIn, error } = useSelector(state => state.user);

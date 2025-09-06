@@ -7,6 +7,7 @@ import Public from "./pages/public/Public";
 import Home from "./pages/public/Home";
 import Login from "./pages/public/Login";
 import Register from "./pages/public/Register";
+import FinalRegister from "./pages/public/FinalRegister";
 import Products from "./pages/public/Products";
 import DetailProduct from "./pages/public/DetailProduct";
 import Blogs from "./pages/public/Blogs";
@@ -22,6 +23,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path={path.LOGIN} element={<Login />} />
         <Route path={path.REGISTER} element={<Register />} />
+        <Route path={path.FINAL_REGISTER} element={<FinalRegister />} />
         <Route path={path.FORGOT_PASSWORD} element={<ForgotPassword />} />
         <Route path={path.PRODUCTS} element={<Products />} />
         <Route path={path.DETAIL_PRODUCT__ID__SLUG} element={<DetailProduct />} />

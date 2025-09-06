@@ -10,6 +10,8 @@ const Register = () => {
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [mobile, setMobile] = useState('');
+
     
     // State để quản lý trạng thái form và thông báo
     const [loading, setLoading] = useState(false);
@@ -23,7 +25,7 @@ const Register = () => {
         setError(''); // Reset lỗi cũ
 
         try {
-            const response = await apiRegister({ firstname, lastname, email, password });
+            const response = await apiRegister({ firstname, lastname, email, password, mobile });
             
             if (response.data.success) {
                 // Đăng ký thành công, chuyển hướng đến trang đăng nhập sau 2 giây
@@ -80,6 +82,15 @@ const Register = () => {
                         <input 
                             type="email" id="email" value={email}
                             onChange={(e) => setEmail(e.target.value)} required
+                            className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-main focus:border-main"
+                        />
+                    </div>
+
+                                        <div>
+                        <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">Mobile</label>
+                        <input 
+                            type="mobile" id="mobile" value={mobile}
+                            onChange={(e) => setMobile(e.target.value)} required
                             className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-main focus:border-main"
                         />
                     </div>
