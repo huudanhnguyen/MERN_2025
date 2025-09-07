@@ -191,86 +191,76 @@ const logout = asyncHandler(async (req, res) => {
 
   return res.status(200).json({ success: true, message: "Logout successful" });
 });
+// FORGOT PASSWORD
 const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.query;
   if (!email) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Email is required" });
+    return res.status(400).json({ success: false, message: "Email is required" });
   }
-  // 2. Tìm người dùng trong database
+
   const user = await User.findOne({ email });
   if (!user) {
     return res.status(200).json({
       success: true,
-      message:
-        "If an account with this email exists, a password reset link has been sent.",
+      message: "If an account with this email exists, a password reset link has been sent.",
     });
   }
-  // 3. Tạo reset token và lưu vào user
+
   const resetToken = user.createPasswordResetToken();
-  // Tạm thời lưu lại nhưng chưa commit hẳn, phòng trường hợp gửi mail lỗi
   await user.save({ validateBeforeSave: false });
-  const html = `<p>Click <a href='${process.env.CLIENT_URL}/api/user/reset-password/${resetToken}'>here</a> to reset your password. This link will expire in 10 minutes.</p>`;
-  // Chuẩn bị dữ liệu theo cấu trúc đã cải thiện ở file sendMail.js
-  const data = {
-    email, // Thay vì to: email
-    html,
-    subject: "Forgot Password",
-  };
-  // 5. Gửi email và xử lý kết quả
-  const emailSent = await sendEmail(data);
+
+  const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+  const html = `<p>Click <a href='${resetLink}'>here</a> to reset your password. This link will expire in 10 minutes.</p>`;
+
+  const emailSent = await sendEmail({ email, html, subject: "Forgot Password" });
+
   if (emailSent) {
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Password reset link sent to your email",
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Password reset link sent to your email",
+    });
   } else {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
-    return res
-      .status(500)
-      .json({
-        success: false,
-        message: "Failed to send email. Please try again later.",
-      });
+    return res.status(500).json({
+      success: false,
+      message: "Failed to send email. Please try again later.",
+    });
   }
 });
+// RESET PASSWORD
 const resetPassword = asyncHandler(async (req, res) => {
-  // 1. Lấy token từ URL và mật khẩu mới từ body
   const { password } = req.body;
   const { token } = req.params;
 
   if (!password || !token) {
-    throw new Error("Missing inputs");
+    return res.status(400).json({ success: false, message: "Missing inputs" });
   }
 
-  // 2. Hash lại token nhận được từ URL để so sánh với token trong DB
   const passwordResetToken = crypto
     .createHash("sha256")
     .update(token)
     .digest("hex");
 
-  // 3. Tìm user trong DB có token khớp và token chưa hết hạn
   const user = await User.findOne({
     passwordResetToken,
-    passwordResetExpires: { $gt: Date.now() }, // $gt = greater than (lớn hơn)
+    passwordResetExpires: { $gt: Date.now() },
   });
 
   if (!user) {
-    throw new Error("Invalid reset token or token has expired.");
+    return res.status(400).json({
+      success: false,
+      message: "Invalid or expired reset token",
+    });
   }
 
-  // 4. Nếu tìm thấy user, cập nhật lại mật khẩu
   user.password = password;
-  user.passwordResetToken = undefined; // Xóa token sau khi sử dụng
-  user.passwordResetExpires = undefined; // Xóa thời gian hết hạn
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
   await user.save();
 
-  res.json({
+  return res.json({
     success: true,
     message: "Password has been reset successfully.",
   });
