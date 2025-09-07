@@ -14,6 +14,7 @@ import Blogs from "./pages/public/Blogs";
 import FAQs from "./pages/public/FAQs";
 import OurServices from "./pages/public/OurServices";
 import ForgotPassword from "./pages/public/ForgotPassword";
+import ResetPassword from "./pages/public/ResetPassword";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path={path.REGISTER} element={<Register />} />
         <Route path={path.FINAL_REGISTER} element={<FinalRegister />} />
         <Route path={path.FORGOT_PASSWORD} element={<ForgotPassword />} />
+        <Route path={path.RESET_PASSWORD} element={<ResetPassword />} />
         <Route path={path.PRODUCTS} element={<Products />} />
         <Route path={path.DETAIL_PRODUCT__ID__SLUG} element={<DetailProduct />} />
         <Route path={path.BLOGS} element={<Blogs />} />

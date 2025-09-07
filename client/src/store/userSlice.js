@@ -1,14 +1,15 @@
 // src/store/userSlice.js
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { apiLogin } from '../apis/user';
 
-// --- HÀM ĐỌC TỪ LOCALSTORAGE (An toàn) ---
+// --- HÀM ĐỌC TỪ LOCALSTORAGE ---
 const getInitialState = () => {
     const storedToken = localStorage.getItem('accessToken');
     const storedUserJSON = localStorage.getItem('currentUser');
-    let storedUser = null;
 
+    // console.log("INIT STATE FROM LOCALSTORAGE:", { storedToken, storedUserJSON });
+
+    let storedUser = null;
     if (storedUserJSON && storedUserJSON !== 'undefined') {
         try {
             storedUser = JSON.parse(storedUserJSON);
@@ -17,7 +18,7 @@ const getInitialState = () => {
             localStorage.removeItem('currentUser');
         }
     }
-    
+
     return {
         isLoggedIn: !!storedToken && !!storedUser,
         currentUser: storedUser,
@@ -27,8 +28,7 @@ const getInitialState = () => {
     };
 };
 
-
-// --- ASYNC ACTION (THUNK) ---
+// --- ASYNC ACTION ---
 export const login = createAsyncThunk(
     'user/login',
     async (data, { rejectWithValue }) => {
@@ -36,7 +36,7 @@ export const login = createAsyncThunk(
             const response = await apiLogin(data);
             return response.data; 
         } catch (error) {
-            return rejectWithValue(error.response.data);
+            return rejectWithValue(error.response?.data || { message: "Login failed" });
         }
     }
 );
@@ -44,7 +44,7 @@ export const login = createAsyncThunk(
 // --- SLICE ---
 export const userSlice = createSlice({
     name: 'user',
-    initialState: getInitialState(), // Gọi hàm để lấy state ban đầu
+    initialState: getInitialState(),
     reducers: {
         logout: (state) => {
             localStorage.removeItem('accessToken');
@@ -61,32 +61,32 @@ export const userSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(login.fulfilled, (state, action) => {
-                // Log payload để chắc chắn về cấu trúc
-                console.log("LOGIN PAYLOAD:", action.payload);
+.addCase(login.fulfilled, (state, action) => {
+    console.log("LOGIN PAYLOAD:", action.payload);
 
-                // Lấy user và token từ payload (dựa trên console log gần nhất của bạn)
-                const user = action.payload?.user;
-                const token = action.payload?.token;
+    const user = action.payload?.user;
+    const token = action.payload?.token;
 
-                // Cập nhật state
-                state.loading = false;
-                state.isLoggedIn = true;
-                state.currentUser = user;
-                state.token = token;
+    state.loading = false;
+    state.isLoggedIn = true;
+    state.currentUser = user || null;
+    state.token = token || null;
 
-                // Chỉ lưu vào localStorage nếu có dữ liệu hợp lệ
-                if (user) {
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
-                if (token) {
-                    localStorage.setItem('accessToken', token);
-                }
-            })
+    // // Debug
+    // console.log("Saving user:", user);
+    // console.log("Saving token:", token);
+
+    if (user) {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+    if (token) {
+        localStorage.setItem('accessToken', String(token)); // ép token thành string luôn
+    }
+})
             .addCase(login.rejected, (state, action) => {
                 state.loading = false;
                 state.isLoggedIn = false;
-                state.error = action.payload?.message;
+                state.error = action.payload?.message || "Login failed";
                 state.token = null;
                 state.currentUser = null;
                 localStorage.removeItem('accessToken');

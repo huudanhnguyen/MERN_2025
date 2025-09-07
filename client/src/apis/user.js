@@ -14,19 +14,11 @@ export const apiRegister = (data) => axios({
 });
 
 export const apiVerifyEmail = (token) => axios({
-    url: `/user/verify-email/${token}`,
+    url: `/user/finalRegister/${token}`, 
     method: 'get'
 });
-// THÊM HÀM NÀY VÀO
-export const apiForgotPassword = (email) => axios({
-    url: '/user/forgotpassword', // Đảm bảo URL này khớp với backend của bạn
-    method: 'post',
-    data: { email } // Gửi email trong body của request
-});
+export const apiForgotPassword = (email) =>
+  axios.get(`/user/forgot-password?email=${email}`);
 
-// THÊM HÀM NÀY CHO RESET MẬT KHẨU SAU KHI CLICK LINK
-export const apiResetPassword = (token, password) => axios({
-    url: `/user/resetpassword/${token}`, // Đảm bảo URL này khớp với backend của bạn
-    method: 'put', // Sử dụng PUT method
-    data: { password } // Gửi mật khẩu mới trong body
-});
+export const apiResetPassword = (token, password) =>
+  axios.put(`/user/reset-password/${token}`, { password });
