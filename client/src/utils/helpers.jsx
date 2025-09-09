@@ -47,3 +47,10 @@ export const renderRatingStars = (totalRating) => {
 
     return stars;
   };
+  export const validateVariant = (product, selectedVariants) => {
+  if (!product?.variants || product.variants.length === 0) return true; // không có biến thể thì luôn hợp lệ
+
+  return product.variants.every(
+    (v) => selectedVariants[v.label] && selectedVariants[v.label].trim() !== ""
+  );
+};
