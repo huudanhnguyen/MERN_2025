@@ -17,7 +17,7 @@ const path = {
   RESET_PASSWORD: "reset-password/:token",
   CART: "cart",
   CHECKOUT: "checkout",
-  DETAIL_PRODUCT__ID__SLUG: "detail-product/:id/:slug",
+  DETAIL_PRODUCT__ID__SLUG: "detail-product/:pid/:slug",
   DETAIL_PRODUCT: "detail-product",
   NOT_FOUND: "*",
   VERIFY_EMAIL: "finalRegister/:token",

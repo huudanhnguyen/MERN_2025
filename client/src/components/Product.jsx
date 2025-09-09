@@ -1,12 +1,12 @@
 import React from "react";
-import { formatPrice, renderRatingStars } from "../utils/helpers";
+import { formatPrice, renderRatingStars, createSlug  } from "../utils/helpers";
 import SelectOptions from "./SelectOptions";
 import { Link } from "react-router-dom";
 import path from "../utils/path";
 
 const Product = ({ productData, label, onQuickView }) => {
   if (!productData) return null;
-
+  const detailUrl = `/${path.DETAIL_PRODUCT}/${productData._id}/${createSlug(productData.title)}`;
   const imageUrl =
     productData?.thumb ||
     (productData?.images && productData.images.length > 0

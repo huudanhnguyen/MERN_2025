@@ -42,7 +42,7 @@ function App() {
 
         {/* nested routes cho MyAccount */}
         <Route path="my-account" element={<MyAccount />}>
-          <Route index element={<Profile />} /> {/* auto vào profile */}
+          <Route index element={<Profile />} />
           <Route path="profile" element={<Profile />} />
           <Route path="orders" element={<Orders />} />
           <Route path="wishlist" element={<Wishlist />} />
